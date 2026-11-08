@@ -1,0 +1,9 @@
+{
+  "name": "team-availability-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "if [ -d \"frontend\" ]; then cd frontend && npm install && npm run build; else npm install && npm run build; fi"
+  }
+}
