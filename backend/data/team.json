@@ -10,8 +10,8 @@
       "initials": "AS",
       "status": "available",
       "note": "Reviewing PRs & available on Slack",
-      "lastSeen": "2026-11-08T05:39:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T05:42:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_2",
@@ -23,8 +23,8 @@
       "initials": "PN",
       "status": "busy",
       "note": "In component sprint - DND",
-      "lastSeen": "2026-11-08T05:22:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T05:25:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_3",
@@ -36,8 +36,8 @@
       "initials": "RV",
       "status": "away",
       "note": "Lunch break, back by 1:30 PM",
-      "lastSeen": "2026-11-08T05:05:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T05:08:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_4",
@@ -49,8 +49,8 @@
       "initials": "SK",
       "status": "available",
       "note": "Working on API integrations",
-      "lastSeen": "2026-11-08T04:48:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T04:51:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_5",
@@ -62,8 +62,8 @@
       "initials": "KM",
       "status": "offline",
       "note": "Out of office today",
-      "lastSeen": "2026-11-08T04:31:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T04:34:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_6",
@@ -75,8 +75,8 @@
       "initials": "AK",
       "status": "available",
       "note": "Pair programming open",
-      "lastSeen": "2026-11-08T04:14:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T04:17:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_7",
@@ -88,8 +88,8 @@
       "initials": "RP",
       "status": "available",
       "note": "Figma review session",
-      "lastSeen": "2026-11-08T03:57:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T04:00:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_8",
@@ -101,8 +101,8 @@
       "initials": "MJ",
       "status": "busy",
       "note": "Design sprint workshop",
-      "lastSeen": "2026-11-08T03:40:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T03:43:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_9",
@@ -114,8 +114,8 @@
       "initials": "DA",
       "status": "offline",
       "note": "On planned leave",
-      "lastSeen": "2026-11-08T03:23:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T03:26:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_10",
@@ -127,8 +127,8 @@
       "initials": "NS",
       "status": "busy",
       "note": "Customer interview call",
-      "lastSeen": "2026-11-08T03:06:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T03:09:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_11",
@@ -140,8 +140,8 @@
       "initials": "AG",
       "status": "available",
       "note": "Sprint planning open",
-      "lastSeen": "2026-11-08T02:49:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T02:52:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_12",
@@ -153,8 +153,8 @@
       "initials": "PR",
       "status": "away",
       "note": "Stepped away for 20m",
-      "lastSeen": "2026-11-08T02:32:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T02:35:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_13",
@@ -166,8 +166,8 @@
       "initials": "SK",
       "status": "available",
       "note": "Q4 analytics review",
-      "lastSeen": "2026-11-08T02:15:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T02:18:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_14",
@@ -179,8 +179,8 @@
       "initials": "AD",
       "status": "offline",
       "note": "Traveling",
-      "lastSeen": "2026-11-08T01:58:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T02:01:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_15",
@@ -192,8 +192,8 @@
       "initials": "VR",
       "status": "available",
       "note": "HR office hours",
-      "lastSeen": "2026-11-08T01:41:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T01:44:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_16",
@@ -205,8 +205,8 @@
       "initials": "DI",
       "status": "away",
       "note": "Server maintenance window",
-      "lastSeen": "2026-11-08T01:24:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T01:27:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_17",
@@ -218,8 +218,8 @@
       "initials": "RB",
       "status": "busy",
       "note": "Training LLM benchmark models",
-      "lastSeen": "2026-11-08T01:07:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T01:10:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_18",
@@ -231,8 +231,8 @@
       "initials": "KP",
       "status": "available",
       "note": "Ready for feature requests",
-      "lastSeen": "2026-11-08T00:50:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T00:53:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_19",
@@ -244,8 +244,8 @@
       "initials": "SG",
       "status": "available",
       "note": "Building executive dashboards",
-      "lastSeen": "2026-11-08T00:33:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T00:36:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_20",
@@ -257,8 +257,8 @@
       "initials": "LK",
       "status": "busy",
       "note": "Executive sync",
-      "lastSeen": "2026-11-08T00:16:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T00:19:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     },
     {
       "id": "mem_21",
@@ -270,8 +270,8 @@
       "initials": "MD",
       "status": "available",
       "note": "1-on-1s open",
-      "lastSeen": "2026-11-07T23:59:17.732Z",
-      "createdAt": "2026-10-09T05:39:17.732Z"
+      "lastSeen": "2026-11-08T00:02:21.217Z",
+      "createdAt": "2026-10-09T05:42:21.217Z"
     }
   ],
   "logs": [
@@ -283,7 +283,7 @@
       "newStatus": "available",
       "note": "Back from lunch, reviewing PRs",
       "changedBy": "user",
-      "timestamp": "2026-11-08T05:24:17.732Z"
+      "timestamp": "2026-11-08T05:27:21.217Z"
     },
     {
       "id": "log_seed_2",
@@ -293,7 +293,7 @@
       "newStatus": "busy",
       "note": "In component sprint - DND",
       "changedBy": "user",
-      "timestamp": "2026-11-08T04:54:17.732Z"
+      "timestamp": "2026-11-08T04:57:21.217Z"
     },
     {
       "id": "log_seed_3",
@@ -303,7 +303,7 @@
       "newStatus": "busy",
       "note": "Training LLM benchmark models",
       "changedBy": "user",
-      "timestamp": "2026-11-08T04:24:17.732Z"
+      "timestamp": "2026-11-08T04:27:21.217Z"
     }
   ]
 }
