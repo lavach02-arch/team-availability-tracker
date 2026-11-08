@@ -1,9 +1,18 @@
 {
   "name": "team-availability-tracker",
   "version": "1.0.0",
-  "private": true,
+  "description": "Real-time synchronized team availability dashboard with live status toggling",
+  "main": "api/index.js",
   "type": "module",
   "scripts": {
-    "build": "if [ -d \"frontend\" ]; then cd frontend && npm install && npm run build; else npm install && npm run build; fi"
-  }
+    "start": "node backend/src/server.js",
+    "dev": "node --watch backend/src/server.js",
+    "test": "node --test backend/tests/*.test.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "author": "lavach02-arch",
+  "license": "MIT"
 }

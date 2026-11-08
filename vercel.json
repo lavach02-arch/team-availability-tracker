@@ -1,15 +1,9 @@
 {
   "version": 2,
-  "buildCommand": "if [ -d \"frontend\" ]; then cd frontend && npm install && npm run build && cd .. && mkdir -p dist && cp -r frontend/dist/* dist/ 2>/dev/null || true; else npm install && npm run build && mkdir -p frontend/dist && cp -r dist/* frontend/dist/ 2>/dev/null || true; fi",
-  "outputDirectory": "frontend/dist",
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/index.py"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/api/index.js"
     }
   ]
 }

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Availability Tracker | Real-Time Sync Dashboard</title>
+  <meta name="description" content="Real-time synchronized team availability dashboard with live status toggles, persistent storage, and visual indicators.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-indigo-500 selection:text-white">
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-40 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+          <i data-lucide="users" class="w-6 h-6 text-white"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-bold text-lg text-white tracking-tight">Team Pulse</h1>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Live Sync
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">Synchronized Real-Time Team Availability</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Live Connection Status -->
+        <div id="stream-status" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-300 border border-slate-700">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>SSE Connected</span>
+        </div>
+
+        <button type="button" id="btn-open-activity" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors">
+          <i data-lucide="history" class="w-3.5 h-3.5"></i>
+          Activity Log
+        </button>
+
+        <button type="button" id="btn-open-add" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white shadow transition-colors">
+          <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+          Add Member
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- Top Stats Banner -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+      <!-- Total Members -->
+      <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-4 shadow-sm flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="users" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="text-xs font-medium text-slate-400 block">Total Members</span>
+          <span id="stat-total" class="text-2xl font-extrabold text-white">21</span>
+        </div>
+      </div>
+
+      <!-- Available -->
+      <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-4 shadow-sm flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="text-xs font-medium text-emerald-400 block">Available Now</span>
+          <span id="stat-available" class="text-2xl font-extrabold text-white">--</span>
+        </div>
+      </div>
+
+      <!-- Busy -->
+      <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-4 shadow-sm flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="phone-call" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="text-xs font-medium text-red-400 block">In Meeting / Busy</span>
+          <span id="stat-busy" class="text-2xl font-extrabold text-white">--</span>
+        </div>
+      </div>
+
+      <!-- Away -->
+      <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-4 shadow-sm flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="coffee" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="text-xs font-medium text-amber-400 block">Away / Break</span>
+          <span id="stat-away" class="text-2xl font-extrabold text-white">--</span>
+        </div>
+      </div>
+
+      <!-- Availability Rate -->
+      <div class="col-span-2 sm:col-span-1 bg-slate-900/90 rounded-2xl border border-slate-800 p-4 shadow-sm flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="activity" class="w-5 h-5"></i>
+        </div>
+        <div class="flex-1">
+          <span class="text-xs font-medium text-slate-400 block">Availability Rate</span>
+          <div class="flex items-baseline gap-1.5">
+            <span id="stat-rate" class="text-2xl font-extrabold text-white">--%</span>
+          </div>
+          <div class="w-full bg-slate-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
+            <div id="stat-rate-bar" class="bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-4 sm:p-5 shadow-lg space-y-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        
+        <!-- Status Tabs -->
+        <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800 overflow-x-auto">
+          <button type="button" class="filter-status-btn px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white transition-colors" data-status="all">
+            All (<span id="count-all">21</span>)
+          </button>
+          <button type="button" class="filter-status-btn px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5" data-status="available">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Available
+          </button>
+          <button type="button" class="filter-status-btn px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5" data-status="busy">
+            <span class="w-2 h-2 rounded-full bg-red-400"></span> Busy
+          </button>
+          <button type="button" class="filter-status-btn px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5" data-status="away">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span> Away
+          </button>
+          <button type="button" class="filter-status-btn px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1.5" data-status="offline">
+            <span class="w-2 h-2 rounded-full bg-slate-500"></span> Offline
+          </button>
+        </div>
+
+        <!-- Search Input -->
+        <div class="relative w-full md:w-72">
+          <input type="text" id="search-input" placeholder="Search member, role, note..." class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+          <i data-lucide="search" class="w-4 h-4 text-slate-500 absolute left-3 top-2.5"></i>
+        </div>
+      </div>
+
+      <!-- Department Filter Chips -->
+      <div class="flex items-center gap-2 overflow-x-auto pt-2 border-t border-slate-800 text-xs">
+        <span class="text-slate-500 text-[11px] font-semibold uppercase tracking-wider mr-1 flex-shrink-0">Department:</span>
+        <button type="button" class="filter-dept-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 transition-colors flex-shrink-0" data-dept="All">All</button>
+        <button type="button" class="filter-dept-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors flex-shrink-0" data-dept="Engineering">Engineering</button>
+        <button type="button" class="filter-dept-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors flex-shrink-0" data-dept="Design">Design</button>
+        <button type="button" class="filter-dept-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors flex-shrink-0" data-dept="Product">Product</button>
+        <button type="button" class="filter-dept-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors flex-shrink-0" data-dept="Data & AI">Data & AI</button>
+        <button type="button" class="filter-dept-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors flex-shrink-0" data-dept="Marketing">Marketing</button>
+        <button type="button" class="filter-dept-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors flex-shrink-0" data-dept="Operations">Operations</button>
+      </div>
+    </div>
+
+    <!-- Team Members Grid -->
+    <div id="members-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Populated dynamically by app.js -->
+      <div class="col-span-full py-20 text-center text-slate-500">
+        <i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto mb-2 text-indigo-500"></i>
+        <p class="text-xs">Loading live team availability...</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Activity Audit Log Modal / Drawer -->
+  <div id="modal-activity" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-fade-in">
+      <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i data-lucide="history" class="w-5 h-5 text-indigo-400"></i>
+          <h3 class="font-bold text-white text-base">Live Activity Audit Trail</h3>
+        </div>
+        <button type="button" id="btn-close-activity" class="text-slate-400 hover:text-white p-1 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="activity-log-list" class="p-4 overflow-y-auto space-y-3 flex-1 text-xs">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Member Modal -->
+  <div id="modal-add-member" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl animate-fade-in">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+        <h3 class="font-bold text-white text-base flex items-center gap-2">
+          <i data-lucide="user-plus" class="w-4 h-4 text-emerald-400"></i>
+          Add New Team Member
+        </h3>
+        <button type="button" id="btn-close-add" class="text-slate-400 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="form-add-member" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Full Name *</label>
+          <input type="text" id="add-name" required placeholder="e.g. Kavya Reddy" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Role *</label>
+            <input type="text" id="add-role" required placeholder="e.g. Cloud Architect" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Department</label>
+            <select id="add-dept" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="Engineering">Engineering</option>
+              <option value="Design">Design</option>
+              <option value="Product">Product</option>
+              <option value="Data & AI">Data & AI</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Operations">Operations</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Status Note (Optional)</label>
+          <input type="text" id="add-note" placeholder="e.g. Available on Slack" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+
+        <div class="pt-2 flex justify-end gap-2">
+          <button type="button" id="btn-cancel-add" class="px-3 py-2 text-xs font-semibold text-slate-400 hover:text-slate-200">Cancel</button>
+          <button type="submit" class="px-4 py-2 text-xs font-bold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow">Save Member</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Application JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
