@@ -1,0 +1,62 @@
+.activity-page__header {
+  background: linear-gradient(135deg, #064E3B 0%, #059669 100%);
+  padding: 36px 0 32px; color: #fff;
+}
+.activity-page__header-inner {
+  max-width: 900px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.activity-page__header-inner h1 { font-size: clamp(22px,3vw,30px); font-weight: 800; }
+.activity-page__header-inner p  { opacity: .75; font-size: 14px; margin-top: 4px; }
+.activity-page__refresh {
+  padding: 8px 18px; background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.25); color: #fff;
+  border-radius: var(--radius-sm); font-size: 13px; font-weight: 600;
+  transition: var(--t);
+}
+.activity-page__refresh:hover { background: rgba(255,255,255,.25); }
+
+.activity-page__body {
+  max-width: 900px; margin: 0 auto; padding: 28px 24px 60px;
+}
+
+.activity-list { display: flex; flex-direction: column; gap: 2px; }
+
+.activity-skeleton {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--surface); border-radius: var(--radius-md);
+  padding: 14px 16px; margin-bottom: 2px;
+}
+
+.activity-item {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 14px 16px;
+  transition: var(--t);
+  animation: fadeUp .3s var(--ease) both;
+}
+.activity-item:hover { background: var(--surface-2); box-shadow: var(--shadow-sm); }
+
+.activity-item__avatar {
+  width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 13px; color: #fff;
+}
+.activity-item__body { flex: 1; min-width: 0; }
+.activity-item__title {
+  font-size: 13px; color: var(--text); margin-bottom: 4px;
+}
+.activity-item__title strong { font-weight: 700; }
+.activity-item__change {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.activity-item__arrow { font-size: 11px; color: var(--text-light); }
+.activity-item__note { font-size: 11px; color: var(--text-light); font-style: italic; }
+.activity-item__time { font-size: 11px; color: var(--text-light); white-space: nowrap; flex-shrink: 0; }
+
+.activity-empty {
+  text-align: center; padding: 60px 20px;
+  background: var(--surface); border-radius: var(--radius-xl); border: 1px dashed var(--border);
+}
+.activity-empty span { font-size: 48px; display: block; margin-bottom: 12px; }
+.activity-empty p { color: var(--text-muted); }
